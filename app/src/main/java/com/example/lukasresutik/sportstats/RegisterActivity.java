@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                     if(success)
                     {
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         RegisterActivity.this.startActivity(intent);
                     }
                     else

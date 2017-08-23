@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import com.example.lukasresutik.sportstats.activities.SportActivity;
+
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText etUsername;
     private EditText etPassword;
@@ -41,11 +43,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("Registracia", "stlacenie registraci");
         switch(v.getId()) {
             case R.id.tvRegisterHere:
-                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
-                MainActivity.this.startActivity(registerIntent);
+                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+                LoginActivity.this.startActivity(registerIntent);
                 break;
             case R.id.btLogin:
-
+                Intent loginIntent = new Intent(LoginActivity.this,SportActivity.class);
+                LoginActivity.this.startActivity(loginIntent);
                 break;
             default:
                 break;
