@@ -14,6 +14,7 @@ import com.alamkanak.weekview.WeekViewEvent;
 import com.example.lukasresutik.sportstats.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class DetailDayActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener {
@@ -55,6 +56,18 @@ public class DetailDayActivity extends AppCompatActivity implements WeekView.Eve
     @Override
     public List<? extends WeekViewEvent> onMonthChange(int newYear, int newMonth) {
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
+
+        Calendar startTime = Calendar.getInstance();
+        startTime.set(Calendar.HOUR_OF_DAY, 14);
+        startTime.set(Calendar.MINUTE, 0);
+        startTime.set(Calendar.MONTH, newMonth-1);
+        startTime.set(Calendar.YEAR, newYear);
+        Calendar endTime = (Calendar) startTime.clone();
+        endTime.add(Calendar.HOUR, 3);
+
+        WeekViewEvent event = new WeekViewEvent(1,"Testovanie vyvoja kalendar",startTime,endTime);
+        event.setColor(getResources().getColor(R.color.colorPrimary));
+        events.add(event);
         return events;
     }
 
