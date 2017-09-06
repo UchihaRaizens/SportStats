@@ -12,14 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity"
-                  android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".UserAreaActivity" />
         <activity android:name=".activities.SportActivity" />
         <activity android:name=".activities.AboutUsActivity" />

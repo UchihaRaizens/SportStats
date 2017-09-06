@@ -9,71 +9,81 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/gradient_background"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="40dp">
-
-        <android.support.design.widget.TextInputLayout
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textColorHint="#cccccc">
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="40dp">
 
-            <EditText
-                android:id="@+id/etUserName"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#ffff"
-                android:hint="   Username"
-                android:inputType="textPersonName"
-                android:textColor="#cccccc"
-                android:textSize="20sp" />
-             <!--  android:drawableLeft="@drawable/user"-->
+                android:layout_marginTop="30dp"
+                android:textColorHint="#cccccc">
 
-        </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/etUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ffff"
+                    android:hint="   Username"
+                    android:inputType="textPersonName"
+                    android:textColor="#cccccc"
+                    android:textSize="20sp" />
+                 <!--  android:drawableLeft="@drawable/user"-->
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textColorHint="#cccccc">
+            </android.support.design.widget.TextInputLayout>
 
-            <EditText
-                android:id="@+id/etPassword"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#ffff"
-                android:hint="   Password"
-                android:inputType="textPassword"
-                android:textColor="#cccccc"
-                android:textSize="20sp" />
-               <!-- android:drawableLeft="@drawable/lock"-->
+                android:layout_marginTop="10dp"
+                android:textColorHint="#cccccc">
 
-        </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#ffff"
+                    android:hint="   Password"
+                    android:inputType="textPassword"
+                    android:textColor="#cccccc"
+                    android:textSize="20sp" />
+                   <!-- android:drawableLeft="@drawable/lock"-->
 
-        <TextView
-            android:id="@+id/tvRegisterHere"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="16dp"
-            android:text="Forgot Password?"
-            android:textColor="#ffffff"
-            android:textSize="16sp" />
+            </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/btLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="#79a209df"
-            android:text="Log In"
-            android:textColor="#cccccc" />
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="16dp"
+                android:text="Forgot Password?"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#BDBDBD"
+                android:text="Log In"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/tvRegisterHere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:text="@string/createAccount"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>
