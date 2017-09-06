@@ -1,14 +1,19 @@
 package com.example.lukasresutik.sportstats.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.lukasresutik.sportstats.R;
+import com.example.lukasresutik.sportstats.activities.DetailDayActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,11 +23,13 @@ import com.example.lukasresutik.sportstats.R;
  * Use the {@link MoviesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MoviesFragment extends Fragment {
+public class MoviesFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private Button testButton;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -55,10 +62,23 @@ public class MoviesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    private void init() {
+        testButton = (Button) getView().findViewById(R.id.btButton);
+        testButton.setOnClickListener(this);
+    }
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        init();
     }
 
     @Override
@@ -90,6 +110,17 @@ public class MoviesFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.btButton:
+                Log.d("StartCalendarDetail", "Tuna");
+                Intent detaildayIntent = new Intent(getActivity(), DetailDayActivity.class);
+                MoviesFragment.this.startActivity(detaildayIntent);
+                break;
+        }
     }
 
     /**
