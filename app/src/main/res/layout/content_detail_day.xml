@@ -13,6 +13,7 @@
         android:layout_width="368dp"
         android:layout_height="495dp"
         app:eventTextColor="@android:color/white"
+        app:eventTextSize="15dp"
         app:textSize="12sp"
         app:hourHeight="60dp"
         app:headerColumnPadding="8dp"
