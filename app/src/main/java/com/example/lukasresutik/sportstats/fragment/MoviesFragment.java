@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,12 @@ import android.widget.Button;
 
 import com.example.lukasresutik.sportstats.R;
 import com.example.lukasresutik.sportstats.activities.DetailDayActivity;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.CalendarMode;
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,14 +31,16 @@ import com.example.lukasresutik.sportstats.activities.DetailDayActivity;
  * Use the {@link MoviesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MoviesFragment extends Fragment implements View.OnClickListener {
+public class MoviesFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private Button testButton;
+    private MaterialCalendarView calendarView;
 
+    private byte doubleClick = 0;
+    private CalendarDay lastClickDate = null;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -70,10 +80,48 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init() {
-        testButton = (Button) getView().findViewById(R.id.btButton);
-        testButton.setOnClickListener(this);
+        calendarView = (MaterialCalendarView) getView().findViewById(R.id.calendarView);
+        setCalendarView();
     }
 
+    private void setCalendarView() {
+        calendarView.state().edit()
+                .setFirstDayOfWeek(Calendar.MONDAY)
+                .setMinimumDate(CalendarDay.from(1900,1,1))
+                .setMaximumDate(CalendarDay.from(2100,12,31))
+                .setCalendarDisplayMode(CalendarMode.MONTHS)
+                .commit();
+
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                doubleClickOnSameDay(date);
+                if(doubleClick == 2)
+                {
+                    doubleClick = 0;
+                    lastClickDate = null;
+                    Intent detaildayIntent = new Intent(getActivity(), DetailDayActivity.class);
+                    MoviesFragment.this.startActivity(detaildayIntent);
+                }
+            }
+        });
+    }
+
+    private void doubleClickOnSameDay(CalendarDay date) {
+        if(lastClickDate == null)
+        {
+            lastClickDate = date;
+            doubleClick++;
+        }
+        else if(lastClickDate.toString().equals(date.toString()))
+        {
+            doubleClick++;
+        }
+        else
+        {
+            lastClickDate = date;
+        }
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -110,17 +158,6 @@ public class MoviesFragment extends Fragment implements View.OnClickListener {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()) {
-            case R.id.btButton:
-                Log.d("StartCalendarDetail", "Tuna");
-                Intent detaildayIntent = new Intent(getActivity(), DetailDayActivity.class);
-                MoviesFragment.this.startActivity(detaildayIntent);
-                break;
-        }
     }
 
     /**
