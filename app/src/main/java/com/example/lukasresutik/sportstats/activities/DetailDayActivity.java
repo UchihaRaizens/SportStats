@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.alamkanak.weekview.MonthLoader;
@@ -43,7 +44,7 @@ public class DetailDayActivity extends AppCompatActivity implements WeekView.Eve
 
     @Override
     public void onEventClick(WeekViewEvent event, RectF eventRect) {
-
+        Log.d("CLICK", "Kliknutie na udalost");
     }
 
 
