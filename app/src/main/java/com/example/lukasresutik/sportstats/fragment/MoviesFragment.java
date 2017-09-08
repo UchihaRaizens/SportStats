@@ -1,18 +1,13 @@
 package com.example.lukasresutik.sportstats.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.lukasresutik.sportstats.R;
 import com.example.lukasresutik.sportstats.activities.DetailDayActivity;
@@ -31,7 +26,7 @@ import java.util.Calendar;
  * Use the {@link MoviesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MoviesFragment extends Fragment {
+public class MoviesFragment extends Fragment implements Runnable{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -81,23 +76,11 @@ public class MoviesFragment extends Fragment {
 
     private void init() {
         calendarView = (MaterialCalendarView) getView().findViewById(R.id.calendarView);
-        setCalendarView();
-    }
-
-    private void setCalendarView() {
-        calendarView.state().edit()
-                .setFirstDayOfWeek(Calendar.MONDAY)
-                .setMinimumDate(CalendarDay.from(1900,1,1))
-                .setMaximumDate(CalendarDay.from(2100,12,31))
-                .setCalendarDisplayMode(CalendarMode.MONTHS)
-                .commit();
-
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
             public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
                 doubleClickOnSameDay(date);
-                if(doubleClick == 2)
-                {
+                if (doubleClick == 2) {
                     doubleClick = 0;
                     lastClickDate = null;
                     Intent detaildayIntent = new Intent(getActivity(), DetailDayActivity.class);
@@ -105,6 +88,16 @@ public class MoviesFragment extends Fragment {
                 }
             }
         });
+
+    }
+
+    private void setCalendarView() {
+        calendarView.state().edit()
+                .setFirstDayOfWeek(Calendar.MONDAY)
+                .setMinimumDate(CalendarDay.from(Calendar.YEAR,1,1))
+                .setMaximumDate(CalendarDay.from(Calendar.YEAR,12,31))
+                .setCalendarDisplayMode(CalendarMode.MONTHS)
+                .commit();
     }
 
     private void doubleClickOnSameDay(CalendarDay date) {
@@ -158,6 +151,11 @@ public class MoviesFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void run() {
+        setCalendarView();
     }
 
     /**
