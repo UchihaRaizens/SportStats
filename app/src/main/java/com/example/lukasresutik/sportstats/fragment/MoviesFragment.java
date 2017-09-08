@@ -84,11 +84,19 @@ public class MoviesFragment extends Fragment implements Runnable{
                     doubleClick = 0;
                     lastClickDate = null;
                     Intent detaildayIntent = new Intent(getActivity(), DetailDayActivity.class);
+                    detaildayIntent.putExtra("EXTRA_DAY",getDateFromat(calendarView.getSelectedDate()));
                     MoviesFragment.this.startActivity(detaildayIntent);
                 }
             }
         });
+    }
 
+    private String getDateFromat(CalendarDay day) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(day.getDay()).append(".")
+                .append(day.getMonth()).append(".")
+                .append(day.getYear());
+        return sb.toString();
     }
 
     private void setCalendarView() {

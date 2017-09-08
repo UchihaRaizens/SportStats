@@ -4,6 +4,7 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.example.lukasresutik.sportstats.R;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,6 +23,7 @@ import java.util.List;
 public class DetailDayActivity extends AppCompatActivity implements WeekView.EventClickListener, MonthLoader.MonthChangeListener, WeekView.EventLongPressListener {
 
     private WeekView mWeekView;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,8 @@ public class DetailDayActivity extends AppCompatActivity implements WeekView.Eve
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.hide();
+
+        loadDayInformation();
     }
 
     private void init() {
@@ -40,6 +45,11 @@ public class DetailDayActivity extends AppCompatActivity implements WeekView.Eve
         mWeekView.setMonthChangeListener(this);
         mWeekView.setEventLongPressListener(this);
         mWeekView.setNumberOfVisibleDays(1);
+    }
+
+    private void loadDayInformation() {
+        date = getIntent().getStringExtra("EXTRA_DAY");
+        setTitle(date);
     }
 
     @Override
@@ -61,7 +71,7 @@ public class DetailDayActivity extends AppCompatActivity implements WeekView.Eve
         endTime.add(Calendar.HOUR, 3);
 
         WeekViewEvent event = new WeekViewEvent(1,"Testovanie vyvoja kalendar",startTime,endTime);
-        event.setColor(getResources().getColor(R.color.colorPrimary));
+        event.setColor(ContextCompat.getColor(this,R.color.colorPrimary));
         events.add(event);
         return events;
     }
