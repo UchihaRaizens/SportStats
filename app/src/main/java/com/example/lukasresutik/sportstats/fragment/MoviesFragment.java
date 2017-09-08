@@ -5,7 +5,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -67,7 +71,7 @@ public class MoviesFragment extends Fragment implements Runnable{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -75,6 +79,7 @@ public class MoviesFragment extends Fragment implements Runnable{
     }
 
     private void init() {
+
         calendarView = (MaterialCalendarView) getView().findViewById(R.id.calendarView);
         calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
             @Override
@@ -180,4 +185,22 @@ public class MoviesFragment extends Fragment implements Runnable{
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.calendar_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.AddDayActivity:
+                Log.d("ADD BUTTON", "CLick on add button");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
